@@ -21,11 +21,11 @@
   </configuration>
   <containers>
     <container>
-      <containerId>Capability1Process-kjar-1_0-SNAPSHOT</containerId>
+      <containerId>Capability1Process-kjar-1_0_0-SNAPSHOT</containerId>
       <releaseId>
         <groupId>com.insurance</groupId>
         <artifactId>Capability1Process-kjar</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
       </releaseId>
       <status>STARTED</status>
       <scanner>

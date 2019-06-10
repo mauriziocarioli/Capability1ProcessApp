@@ -63,11 +63,12 @@ fi
 if [[ "$@" =~ "docker" ]]; then
     echo "Launching the application as docker container..."
     
-    docker run -d -p 8090:8090 --name Capability1Process-service apps/Capability1Process-service:1.0-SNAPSHOT
+    docker run -d -p 8090:8090 --name Capability1Process-service
+    apps/Capability1Process-service:1.0.0-SNAPSHOT
 elif [[ "$@" =~ "openshift" ]]; then
     echo "Launching the application on OpenShift..."
     
-    oc new-app Capability1Process-service:1.0-SNAPSHOT
+    oc new-app Capability1Process-service:1.0.0-SNAPSHOT
     oc expose svc/Capability1Process-service
 else
 
