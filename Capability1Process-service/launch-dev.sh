@@ -24,7 +24,7 @@ if [ "$MVN_ARG_LINE" != "" ] ; then
 
     "$mvnBin" -v
     echo
-    projects=( "*-model" "*-kjar" "business-application-service")
+    projects=( "*-model" "*-kjar" "Capability1Process-service")
 
     for suffix in "${projects[@]}"; do
 
@@ -59,7 +59,7 @@ else
 fi
 
 echo "Launching the application in development mode - requires connection to controller (workbench)"
-pattern="business-application-service"
+pattern="Capability1Process-service"
 files=( $pattern )
 cd ${files[0]}
 executable="$(ls  *target//*.jar | tail -n1)"

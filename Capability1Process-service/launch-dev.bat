@@ -12,7 +12,7 @@ if "%*" == "" (
 
 	cd ..
 
-	for %%s in ("-model" "-kjar" "business-application-service") do (
+	for %%s in ("-model" "-kjar" "Capability1Process-service") do (
 
 			cd *%%s
 			echo ===============================================================================
@@ -34,7 +34,7 @@ goto :startapp
 
 :startapp
 	echo "Launching the application in development mode - requires connection to controller (workbench)"
-    cd business-application-service
+    cd Capability1Process-service
     cd target
     for /f "delims=" %%x in ('dir /od /b *.jar') do set latestjar=%%x
     cd ..
