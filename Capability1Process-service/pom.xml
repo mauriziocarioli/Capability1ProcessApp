@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.insurance</groupId>
@@ -6,13 +6,13 @@
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>Capability1Process-service</name>
-
+  
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.1.1.RELEASE</version>
   </parent>
-
+  
   <properties>
     <version.org.kie>7.18.0.Final</version.org.kie>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -22,92 +22,100 @@
     <narayana.version>5.9.0.Final</narayana.version>
     <fabric8.version>3.5.40</fabric8.version>
   </properties>
-
+  
   <dependencies>
-     <dependency>
+    <dependency>
       <groupId>com.insurance</groupId>
       <artifactId>Capability1Process-model</artifactId>
       <version>1.0.0-SNAPSHOT</version>
+    </dependency>    
+    <dependency>
+      <groupId>org.kie</groupId>
+      <artifactId>kie-server-spring-boot-starter</artifactId>
+      <version>${version.org.kie}</version>
     </dependency>
-    
-<dependency>
-    <groupId>org.kie</groupId>
-    <artifactId>kie-server-spring-boot-starter</artifactId>
-    <version>${version.org.kie}</version>
-</dependency>
-
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-dbcp2</artifactId>
+      <version>2.6.0</version>
+    </dependency>    
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
       <scope>test</scope>
     </dependency>
   </dependencies>
-
+  
   <build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        
+        <configuration>
+          <jvmArguments>
+	      -Xms1024m
+	      -Xmx2048m
+	   </jvmArguments>
+        </configuration>
       </plugin>
     </plugins>
   </build>
-
-  <profiles>  
+  
+  <profiles>
     
-<profile>
-  <id>h2</id>
-  <activation>
-    <activeByDefault>true</activeByDefault>
-  </activation>
-  <dependencies>
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-    </dependency>
-  </dependencies>
-</profile>
-
-<profile>
-  <id>mysql</id>
-  <activation>
-    <property>
-      <name>mysql</name>
-    </property>
-  </activation>
-  <dependencies>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-   </dependency>
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-</profile>
-
-<profile>
-  <id>postgres</id>
-  <activation>
-    <property>
-      <name>postgres</name>
-    </property>
-  </activation>
-  <dependencies>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-</profile>
-        
+    <profile>
+      <id>h2</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+        </dependency>
+      </dependencies>
+    </profile>
+    
+    <profile>
+      <id>mysql</id>
+      <activation>
+        <property>
+          <name>mysql</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>mysql</groupId>
+          <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    
+    <profile>
+      <id>postgres</id>
+      <activation>
+        <property>
+          <name>postgres</name>
+        </property>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.h2database</groupId>
+          <artifactId>h2</artifactId>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+    </profile>
+    
     <profile>
       <id>docker</id>
       <activation>
@@ -115,7 +123,7 @@
           <name>docker</name>
         </property>
       </activation>
-
+      
       <build>
         <plugins>
           <plugin>
@@ -153,7 +161,7 @@
                         </fileSet>
                         <fileSet>
                           <directory>../Capability1Process-kjar/target/local-repository/maven</directory>
-                          <outputDirectory>opt/jboss/.m2/repository</outputDirectory>        
+                          <outputDirectory>opt/jboss/.m2/repository</outputDirectory>
                         </fileSet>
                       </inline>
                       <user>jboss:jboss:jboss</user>
@@ -175,6 +183,7 @@
         </plugins>
       </build>
     </profile>
+    
     <profile>
       <id>openshift</id>
       <activation>
@@ -182,12 +191,12 @@
           <name>openshift</name>
         </property>
       </activation>
-
+      
       <properties>
         <fabric8.mode>openshift</fabric8.mode>
         <fabric8.build.strategy>docker</fabric8.build.strategy>
       </properties>
-
+      
       <build>
         <plugins>
           <plugin>
@@ -225,7 +234,7 @@
                         </fileSet>
                         <fileSet>
                           <directory>../Capability1Process-kjar/target/local-repository/maven</directory>
-                          <outputDirectory>opt/jboss/.m2/repository</outputDirectory>        
+                          <outputDirectory>opt/jboss/.m2/repository</outputDirectory>
                         </fileSet>
                       </inline>
                       <user>jboss:jboss:jboss</user>
@@ -251,8 +260,8 @@
       </build>
     </profile>
   </profiles>
-
-  <repositories>    
+  
+  <repositories>
     <repository>
       <id>jboss-public-repository-group</id>
       <name>JBoss Public Repository Group</name>
